@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "stm32f4xx.h"
+#include "systick.h"
 
 #define GPIOAEN	(1U<<0)
 #define PIN5	(1U<<5)
@@ -19,11 +20,7 @@ int main(void)
 	while(1)
 	{
 		GPIOA->ODR ^= LED_PIN;
-		//GPIOA->ODR |= LED_PIN;
 		systickDelayMs(1000);
-		//GPIOA->ODR &=~ LED_PIN;
-		//systickDelayMs(500);
-
 	}
 }
 
