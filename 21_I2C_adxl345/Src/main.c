@@ -2,48 +2,39 @@
 #include <stdint.h>
 #include "stm32f4xx.h"
 #include "uart.h"
+#include "adxl345.h"
 
-#define GPIOAEN (1U<<0)
-#define GPIOA_5 (1U<<5)
-#define LED_PIN GPIOA_5
+int16_t x,y,z;
+float xg, yg, zg;
+extern uint8_t data_rec[6];
+int coucou = 0;
 
-static void dma_callback(void);
-
-//Main
+/*
+ * Be carefull, using debugger with I2C component introduces a glitch random behavior.
+ * I2C seems do not like software debbuging. Prefer using an oscilloscope or
+ * I2C bus analyzer to do so. Debug by print using uart is usefull here.
+ * This driver is not enough smart to carry I2C error communication.
+ * May consider to upgrade later using for exemple I2C_CR1 -> SWRST bit
+ * when the I2C bus is freezing.
+ */
 int main(void)
 {
-	char message[31] = "Hello from Stm32 DMA transfer\n\r";
-	//1. Enable clock access to GPIOA
-	RCC->AHB1ENR |= GPIOAEN;
-	//2.Set PA5 as output pin
-	GPIOA->MODER |= (1U<<10);
-	GPIOA->MODER &= ~(1U<<11);
-
-	//Initialise UART
-	uart2_tx_init();
-	dma1_stream6_init((uint32_t) message, (uint32_t) &USART2->DR, 31);
+	uart2_rxtx_init();
+	adxl_init();
 	while(1)
 	{
+		adxl_read_values(DATA_START_ADDR);
+		x = ((data_rec[1]<<8)|data_rec[0]); //combine x0,x1
+		y = ((data_rec[5]<<8)|data_rec[2]); //combine y0,y1
+		z = ((data_rec[5]<<8)|data_rec[4]); //combine z0,z1
+
+		//FOUR_G_SCALE_FACT = 0.0078
+		xg = (x*0.0078);
+		yg = (y*0.0078);
+		zg = (z*0.0078);
+		printf("ADXL345 Sensor value :\n\r x = %d\n\r y = %d\n\r z = %d\n\r \n\r", x,y,z);
 	}
 }
-
-static void dma_callback(void)
-{
-	GPIOA->ODR |= LED_PIN;
-}
-
-void DMA1_Stream6_IRQHandler(void)
-{
-	/*Check for transfer complete interrupt*/
-	if(DMA1->HISR & HISR_TCIF6)
-	{
-		/*Clear flag*/
-		DMA1->HIFCR |= HIFCR_CTCIF6;
-		/*Do something*/
-		dma_callback();
-	}
-}
-
 
 
 
