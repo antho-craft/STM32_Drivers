@@ -13,7 +13,7 @@
 - Systick interrupt
 - Timer interrupt
 - UART TX DMA
-- I2C using ADXL345 accelerometer
+- I2C/SPI using ADXL345 accelerometer
 - GPIO Output
 - GPIO BSRR
 - GPIO Input
