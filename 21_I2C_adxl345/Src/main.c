@@ -7,8 +7,6 @@
 int16_t x,y,z;
 float xg, yg, zg;
 extern uint8_t data_rec[6];
-int coucou = 0;
-
 /*
  * Be carefull, using debugger with I2C component introduces a glitch random behavior.
  * I2C seems do not like software debbuging. Prefer using an oscilloscope or
@@ -16,6 +14,14 @@ int coucou = 0;
  * This driver is not enough smart to carry I2C error communication.
  * May consider to upgrade later using for exemple I2C_CR1 -> SWRST bit
  * when the I2C bus is freezing.
+ */
+
+/*
+ * PINOUT ADXL345 I2C:
+ * PB8 -> SCL
+ * PB9 -> SDA
+ * VCC -> +5v
+ * GND -> GND
  */
 int main(void)
 {
