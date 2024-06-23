@@ -1,5 +1,4 @@
-![ADXL345_SPI_MEASURE](https://github.com/antho-craft/STM32_Drivers/assets/135449018/a3540b22-14f3-4b1f-806d-96758ed9f8b0)# This repository deals with some basics programming bare metal drivers for STM32F411RE microcontroller with Nucleo board:
-
+# This repository deals with some basics programming bare metal drivers for STM32F411RE microcontroller with Nucleo board:
 - Led toogling (from scratch without using "stm32f4xx.h" library)
 - Led toogling (using "stm32f4xx.h" library)
 - Adc
