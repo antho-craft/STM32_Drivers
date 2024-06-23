@@ -13,7 +13,8 @@
 - Systick interrupt
 - Timer interrupt
 - UART TX DMA
-- I2C/SPI using ADXL345 accelerometer
+- I2C/SPI using ADXL345 accelerometer:
+-- ![ADXL345_SPI_OSCILLOSCOPE](https://github.com/antho-craft/STM32_Drivers/assets/135449018/2c3e7553-f36c-4dd4-91a5-c5cb89c13a3e)
 - GPIO Output
 - GPIO BSRR
 - GPIO Input
