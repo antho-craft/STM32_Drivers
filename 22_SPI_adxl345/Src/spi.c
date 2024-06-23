@@ -52,9 +52,9 @@ void spi1_config(void)
 {
 	/*Enable clock access to SPI1 module*/
 	RCC->APB2ENR |= SPI1EN;
-	/*Set clock to fPCLK/4*/
+	/*Set SPI clock to fPCLK/16 = 1Mhz Note: default fPCLK is 16Mhz (it is the default frequency of the microcontroller)*/
 	SPI1->CR1 |=(1U<<3);
-	SPI1->CR1 &=~(1U<<4);
+	SPI1->CR1 |=(1U<<4);
 	SPI1->CR1 &=~(1U<<5);
 	/*Set CPOL to 1 and CPHA to 1*/
 	SPI1->CR1 |=(1U<<0);
