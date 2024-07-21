@@ -21,6 +21,7 @@
 - UART RX (without interrupt)
 - ADC (without interrupt)
 - LCD display (1602A)
-![LCD_display](https://github.com/user-attachments/assets/519d54f0-6ba9-4a3a-a040-4ecbc3d81d54)
+![LCD_display](https://github.com/user-attachments/assets/23b4f0b9-7b30-4d2a-b27e-b544abf3fd63)
+
 
 
